@@ -1,4 +1,4 @@
-name: Deploy Frontend
+name: Deploy with Password
 
 on:
   push:
@@ -9,20 +9,21 @@ on:
       - 'docker-compose.yml'
 
 jobs:
-  deploy_frontend:
+  deploy_backend:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.SSH_KEY }}
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
 
-      - name: Deploy Frontend
+      - name: Deploy Backend with Password
+        env:
+          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
         run: |
-          ssh -o StrictHostKeyChecking=no skfnxh@rgpsh.iptime.org << 'EOF'
+          sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no skfnx@rgpsh.iptime.org << 'EOF'
             cd Z:\workspace
             git pull origin main
             docker-compose up -d --build next-demo
