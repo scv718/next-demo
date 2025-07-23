@@ -21,7 +21,7 @@ jobs:
         env:
           SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
         run: |
-          sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no skfnx@rgpsh.iptime.org << 'EOF'
+          ssh -o StrictHostKeyChecking=no skfnxh@rgpsh.iptime.org << 'EOF'
             cd Z:\workspace
             git pull origin main
             docker-compose up -d --build next-demo
