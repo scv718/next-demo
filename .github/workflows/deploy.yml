@@ -3,8 +3,7 @@ name: Deploy with Password
 on:
   push:
     branches:
-      - main
-      - master
+    - master
 
 jobs:
   deploy_backend:
@@ -14,6 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+
       - name: Install sshpass
         run: sudo apt-get update && sudo apt-get install -y sshpass
 
@@ -22,8 +22,12 @@ jobs:
           SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
         run: |
           sshpass -p "$SSH_PASSWORD" ssh -t -o StrictHostKeyChecking=no skfnx@rgpsh.iptime.org << 'EOF'
-            cd Z:\workspace
-            git pull origin main
-            docker-compose up -d --build next-demo
+            cd /d Z:\workspace\next-demo
+            git pull origin master
+
+            cd /d Z:\workspace
+            docker-compose up -d --build frontend
           EOF
+
+
 
