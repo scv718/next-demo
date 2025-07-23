@@ -1,0 +1,29 @@
+name: Deploy Frontend
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'next-demo/**'
+      - 'docker-compose.yml'
+
+jobs:
+  deploy_frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Deploy Frontend
+        run: |
+          ssh -o StrictHostKeyChecking=no skfnxh@rgpsh.iptime.org << 'EOF'
+            cd Z:\workspace
+            git pull origin main
+            docker-compose up -d --build next-demo
+          EOF
