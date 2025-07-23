@@ -31,7 +31,7 @@ jobs:
         env:
           SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
         run: |
-          sshpass -p "$SSH_PASSWORD" scp -r .next package.json next.config.js public/ skfnx@rgpsh.iptime.org:/cygdrive/z/workspace/next-demo/
+          sshpass -p "$SSH_PASSWORD" scp -o StrictHostKeyChecking=no -r .next package.json next.config.js public/ skfnx@rgpsh.iptime.org:/cygdrive/z/workspace/next-demo/
 
       - name: Deploy Frontend with Password
         env:
