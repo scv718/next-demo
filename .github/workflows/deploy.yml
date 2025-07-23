@@ -10,34 +10,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build Next.js
-        run: npm run build
-
       - name: Install sshpass
         run: sudo apt-get update && sudo apt-get install -y sshpass
-
-      - name: Copy Next.js build to server
-        env:
-          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
-        run: |
-          sshpass -p "$SSH_PASSWORD" scp -o StrictHostKeyChecking=no -r .next package.json next.config.js public/ skfnx@rgpsh.iptime.org:/cygdrive/z/workspace/next-demo/
 
       - name: Deploy Frontend with Password
         env:
           SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
         run: |
           sshpass -p "$SSH_PASSWORD" ssh -t -o StrictHostKeyChecking=no skfnx@rgpsh.iptime.org << 'EOF'
+            cd /d Z:\workspace\next-demo
+            git pull origin master
+            npm ci
+            npm run build
+
             cd /d Z:\workspace
             docker-compose up -d --build frontend
           EOF
