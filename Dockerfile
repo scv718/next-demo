@@ -1,5 +1,5 @@
 # 1. 빌드 단계 (Builder Stage)
-FROM node:18-alpine AS builder
+FROM node:18-slim AS builder
 
 # 작업 디렉토리 설정
 WORKDIR /usr/src/app
@@ -18,7 +18,7 @@ RUN npm run build
 
 
 # 2. 실행 단계 (Runner Stage)
-FROM node:18-alpine AS runner
+FROM node:18-slim AS runner
 
 # 작업 디렉토리 설정
 WORKDIR /usr/src/app
