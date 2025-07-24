@@ -1,9 +1,0 @@
-{
-    "eslint.format.enable": true,
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-    "css.lint.unknownAtRules": "ignore",
-    "typescript.preferences.importModuleSpecifier": "non-relative",
-    "files.autoSave": "afterDelay",
-    "git.autofetch": true,
-}

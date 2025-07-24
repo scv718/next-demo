@@ -1,0 +1,21 @@
+{
+  "name": "Next.js DevContainer",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:22",
+  "forwardPorts": [3000],
+  "postCreateCommand": "npm install",
+  "customizations": {
+    "vscode": {
+      "extensions": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode", "bradlc.vscode-tailwindcss"],
+      "settings": {
+            "eslint.format.enable": true,
+            "editor.formatOnSave": true,
+            "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+            "css.lint.unknownAtRules": "ignore",
+            "typescript.preferences.importModuleSpecifier": "non-relative",
+            "files.autoSave": "afterDelay",
+            "git.autofetch": true,
+            "editor.tabSize": 2
+        }
+    }
+  }
+}
