@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  next-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: my-next-app-dev
+    ports:
+      - "4030:3000"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+    environment:
+      - NODE_ENV=development
