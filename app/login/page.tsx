@@ -24,6 +24,7 @@ export default function LoginPage() {
 
       if (!response.ok) {
         alert("로그인 실패");
+
         return;
       }
 
@@ -40,7 +41,12 @@ export default function LoginPage() {
 
   const handleLogout = async () => {
     const refreshToken = localStorage.getItem("refreshToken");
-    if (!refreshToken) return alert("로그인되어 있지 않습니다.");
+
+    if (!refreshToken) {
+      alert("로그인되어 있지 않습니다.");
+
+      return;
+    }
 
     try {
       const response = await fetch("http://rgpsh.iptime.org:17070/api/auth/logout", {
@@ -53,6 +59,7 @@ export default function LoginPage() {
 
       if (!response.ok) {
         alert("로그아웃 실패");
+
         return;
       }
 
