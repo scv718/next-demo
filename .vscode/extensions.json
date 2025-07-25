@@ -1,0 +1,14 @@
+{
+    /**
+     * These are the extensions recommended by the workspace. The workspace recommendations are calculated based on the extensions used by others in the same workspace.
+     * Feel free to include or exclude extensions from the list. The order of extensions is not important.
+     *
+     * See https://go.microsoft.com/fwlink/?LinkId=827846 to learn about workspace recommendations.
+     **/
+    "recommendations": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss",
+        "donjayamanne.githistory"
+    ]
+}
