@@ -3,7 +3,6 @@ name: Deploy Next.js Frontend
 on:
   push:
     branches:
-      - master
       - dev
 
 jobs:
@@ -20,7 +19,7 @@ jobs:
         run: |
           sshpass -p "$SSH_PASSWORD" ssh -t -o StrictHostKeyChecking=no skfnx@rgpsh.iptime.org << 'EOF'
             cd /d Z:\workspace\next-demo
-            git pull origin master
+            git pull origin dev
             npm ci
             npm run build
 
