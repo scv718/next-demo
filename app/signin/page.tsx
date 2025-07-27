@@ -1,8 +1,10 @@
 import Link from 'next/link';
 
+import KakaoSymbol from '@/assets/images/login/kakao_symbol.svg';
 import { SubmitButton } from '@/components/button/SubmitButton';
 import { SignForm } from '@/components/form/SignForm';
-import { authenticate } from '@/lib/actions';
+import { credentials, kakao } from '@/lib/actions';
+import { Button } from '@mui/material';
 
 export default () => {
   return (
@@ -12,7 +14,7 @@ export default () => {
           <h3 className='text-xl font-semibold'>Sign In</h3>
           <p className='text-sm text-gray-500'>Use your email and password to sign in</p>
         </div>
-        <SignForm action={authenticate}>
+        <SignForm action={credentials}>
           <SubmitButton>Sign in</SubmitButton>
           <p className='text-center text-sm text-gray-600'>
             {"Don't have an account? "}
@@ -23,6 +25,7 @@ export default () => {
           </p>
         </SignForm>
       </div>
+      <KakaoSymbol className='w-5 h-5' onClick={kakao} />
     </div>
   );
 };

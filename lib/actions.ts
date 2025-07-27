@@ -2,12 +2,16 @@
 
 import { signIn } from '@/lib/auth';
 
-export async function authenticate(formData: FormData) {
+export async function credentials(formData: FormData) {
   await signIn('credentials', {
     redirectTo: '/',
     email: formData.get('email') as string,
     password: formData.get('password') as string
   });
+}
+
+export async function kakao() {
+  await signIn('kakao');
 }
 
 export async function register(formData: FormData) {

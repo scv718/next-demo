@@ -1,7 +1,8 @@
-import { authConfig } from '@/auth.config';
-
+// import { AuthAdapter } from './auth-backend-adapter';
+import { AuthAdapter } from './auth-inmemory-adapter';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import KakaoProvider from 'next-auth/providers/kakao';
 
 export const {
   handlers: { GET, POST },
@@ -9,8 +10,16 @@ export const {
   signIn,
   signOut
 } = NextAuth({
-  ...authConfig,
+  // adapter: AuthAdapter(),
+  adapter: AuthAdapter(),
+  session: {
+    strategy: 'database'
+  },
   providers: [
+    KakaoProvider({
+      clientId: process.env.KAKAO_CLIENT_ID!,
+      clientSecret: process.env.KAKAO_CLIENT_SECRET!
+    }),
     CredentialsProvider({
       credentials: {
         email: { label: 'Email', type: 'email' },
@@ -51,5 +60,15 @@ export const {
         // }
       }
     })
-  ]
+  ],
+  // 콜백(callbacks), 페이지(pages) 설정 등은 여기에 계속 작성...
+  callbacks: {
+    async session({ session, user }) {
+      // `user` 객체는 어댑터나 authorize 함수에서 반환된 값입니다.
+      return session;
+    }
+  },
+  pages: {
+    signIn: '/signin'
+  }
 });
