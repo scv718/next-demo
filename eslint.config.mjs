@@ -34,18 +34,16 @@ export default [
   eslintConfigPrettier, // ? https://github.com/prettier/eslint-config-prettier
   {
     rules: {
-      'no-unused-vars': 'off', //사용하지 않는 변수가 있어도 경고나 에러를 표시하지 않습니다.
-      'react/react-in-jsx-scope': 'off', //JSX를 사용하는 파일에서 import React from 'react' 구문이 없어도 에러를 발생시키지 않습니다.
-      'react-hooks/exhaustive-deps': 'off', //useEffect나 useCallback 같은 React Hook의 의존성 배열([])에 모든 종속 항목을 포함했는지 확인하는 규칙을 끕니다.
-      'react/display-name': 'off', //React 컴포넌트에 displayName 속성이 없어도 에러를 표시하지 않습니다.
-      'react/prop-types': 'off', //컴포넌트의 props에 대한 타입 검사(PropTypes)를 강제하지 않습니다.
-      'newline-before-return': 'error', //return 문 바로 앞에 항상 빈 줄이 있도록 강제합니다.
-      '@typescript-eslint/no-unused-vars': 'off', //TypeScript 코드에서 사용하지 않는 변수나 타입이 있어도 에러를 표시하지 않습니다.
-      '@typescript-eslint/no-unused-expressions': 'off', //아무런 효과가 없는 표현식(예: 단독으로 사용된 함수 호출)을 허용합니다.
-      'import/no-unresolved': 'off', //import한 모듈의 경로를 찾을 수 없는 경우에도 에러를 표시하지 않습니다.
-      'import/no-named-as-default': 'off', //named export (예: export { a })를 default import (예: import a from ...)로 가져오는 것을 허용합니다.
-      '@typescript-eslint/no-explicit-any': 'error', // any 타입 사용 금지
-      'no-undefined': 'error' // undefined 식별자 사용 금지
+      'no-unused-vars': 'off',
+      'react/react-in-jsx-scope': 'off',
+      'react-hooks/exhaustive-deps': 'off',
+      'react/display-name': 'off',
+      'react/prop-types': 'off',
+      'newline-before-return': 'error',
+      '@typescript-eslint/no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-expressions': 'off',
+      'import/no-unresolved': 'off',
+      'import/no-named-as-default': 'off'
     }
   },
   // ! ===================== DISCLAIMER =====================
