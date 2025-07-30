@@ -1,3 +1,9 @@
+import { RegisterForm } from '@/components/form/RegisterForm';
+
 export default () => {
-  return <div>고민좀해보자</div>;
+  return (
+    <div className='h-screen w-screen flex justify-center items-center dark:bg-gray-900'>
+      <RegisterForm />
+    </div>
+  );
 };
