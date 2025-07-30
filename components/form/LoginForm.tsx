@@ -3,8 +3,8 @@
 import { useActionState } from 'react';
 
 import { type ActionState, credentials, kakao } from '@/app/signin/actions';
+import AuthBox from '@/components/boxes/AuthBox';
 import { SocialButton } from '@/components/button/SocialButton';
-import AuthContainer from '@/components/containers/AuthContainer';
 import { FormInput } from '@/components/inputs/FormInput';
 import { StyledLink } from '@/components/links/StyledLink';
 import { type LoginSchema, loginSchema } from '@/lib/schema';
@@ -35,7 +35,7 @@ export function LoginForm() {
   });
 
   return (
-    <AuthContainer title={'Log In'}>
+    <AuthBox title={'Log In'}>
       <form action={formAction} className='space-y-4'>
         <FormInput label='Email' type='email' placeholder='Email' required {...register('email')} />
         <FormInput label='Password' type='password' placeholder='Password' required {...register('password')} />
@@ -69,6 +69,6 @@ export function LoginForm() {
           />
         ))}
       </div>
-    </AuthContainer>
+    </AuthBox>
   );
 }

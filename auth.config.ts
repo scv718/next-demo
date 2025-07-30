@@ -1,9 +1,8 @@
-import inMemoryAuthConfig from './lib/auth_config_callback/inmemory.test.integration';
-import SpringBackendAuthConfig from './lib/auth_config_callback/spring.backend.integration';
+import inMemoryAuthConfig from './lib/auth_config_callback/inmemory.test';
+import SpringBackendAuthConfig from './lib/auth_config_callback/rest.api';
 import type { NextAuthConfig } from 'next-auth';
 
-const TYPE = 'inmemory';
-const config = TYPE === 'inmemory' ? inMemoryAuthConfig : SpringBackendAuthConfig;
+const config = process.env.AUTH_STRATEGY === 'inmemory' ? inMemoryAuthConfig : SpringBackendAuthConfig;
 
 export const authConfig = {
   ...config,

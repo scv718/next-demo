@@ -3,7 +3,7 @@
 import { useActionState } from 'react';
 
 import { type ActionState, signUp } from '@/app/signup/actions';
-import AuthContainer from '@/components/containers/AuthContainer';
+import AuthBox from '@/components/boxes/AuthBox';
 import { FormInput } from '@/components/inputs/FormInput';
 import { StyledLink } from '@/components/links/StyledLink';
 import { type RegisterSchema, registerSchema } from '@/lib/schema';
@@ -25,7 +25,7 @@ export function RegisterForm() {
   });
 
   return (
-    <AuthContainer title={'Log In'}>
+    <AuthBox title={'Log In'}>
       <form action={formAction} className='space-y-4'>
         <FormInput label='Email' type='email' placeholder='Email' required {...register('email')} />
         <FormInput label='Username' type='text' placeholder='Username' required {...register('username')} />
@@ -44,6 +44,6 @@ export function RegisterForm() {
           이미 계정이 있니..? <StyledLink href='/signin'>로그인</StyledLink>
         </h3>
       </div>
-    </AuthContainer>
+    </AuthBox>
   );
 }
