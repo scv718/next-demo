@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
 import type { NextConfig } from 'next';
 
-const path = require('path');
-const dotenv = require('dotenv');
+import dotenv from 'dotenv';
+import withFlowbiteReact from 'flowbite-react/plugin/nextjs';
+import path from 'path';
 
 // 현재 환경에 따라 적절한 .env 파일 경로를 설정합니다.
 const envPath =
@@ -76,4 +76,4 @@ const nextConfig: NextConfig = {
   }
 };
 
-export default nextConfig;
+export default withFlowbiteReact(nextConfig);

@@ -5,20 +5,21 @@ import { useActionState } from 'react';
 import { type ActionState, credentials, kakao } from '@/app/signin/actions';
 import AuthBox from '@/components/boxes/AuthBox';
 import { SocialButton } from '@/components/button/SocialButton';
-import { FormInput } from '@/components/inputs/FormInput';
 import { StyledLink } from '@/components/links/StyledLink';
 import { type LoginSchema, loginSchema } from '@/lib/schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 
+import { FloatingLabel, HRText } from 'flowbite-react';
 import { useForm } from 'react-hook-form';
 
 const socialButtons = [
   { src: '/assets/images/login/google.svg', onClick: kakao, alt: 'Google' },
-  { src: '/assets/images/login/Linkedin.svg', onClick: kakao, alt: 'Linkedin' },
+  { src: '/assets/images/login/linkedin.svg', onClick: kakao, alt: 'Linkedin' },
   { src: '/assets/images/login/github.svg', onClick: kakao, alt: 'Github', isDarkModeInvert: true },
   { src: '/assets/images/login/facebook.svg', onClick: kakao, alt: 'Facebook' },
   { src: '/assets/images/login/twitter.svg', onClick: kakao, alt: 'Twitter' },
-  { src: '/assets/images/login/apple.svg', onClick: kakao, alt: 'Apple' }
+  { src: '/assets/images/login/apple.svg', onClick: kakao, alt: 'Apple' },
+  { src: '/assets/images/login/kakao.svg', onClick: kakao, alt: 'Kakao' }
 ];
 
 export function LoginForm() {
@@ -37,8 +38,8 @@ export function LoginForm() {
   return (
     <AuthBox title={'Log In'}>
       <form action={formAction} className='space-y-4'>
-        <FormInput label='Email' type='email' placeholder='Email' required {...register('email')} />
-        <FormInput label='Password' type='password' placeholder='Password' required {...register('password')} />
+        <FloatingLabel variant={'outlined'} label={'Email'} type={'email'} required {...register('email')} />
+        <FloatingLabel variant={'outlined'} label={'Password'} type={'password'} required {...register('password')} />
         {/* 서버로부터 받은 로그인 실패 에러 메시지 */}
         {state?.error && <p className='error-text'>{state.error}</p>}
         <div className='text-sm'>
@@ -57,8 +58,10 @@ export function LoginForm() {
         </h3>
       </div>
 
+      <HRText text={'OR'} />
+
       {/* Third Party Authentication Options */}
-      <div className='flex items-center justify-center mt-5 flex-wrap'>
+      <div className='flex items-center justify-center flex-wrap'>
         {socialButtons.map((btn) => (
           <SocialButton
             key={btn.alt}

@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 
+import { Providers } from '@/app/Providers';
+import { ThemeToggleButton } from '@/components/button/ThemeToggleButton';
+
 import './globals.css';
 
 const geistSans = Geist({
@@ -43,8 +46,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='ko'>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+    <html lang='ko' suppressHydrationWarning>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Providers>
+          {children}
+          {/* 전역 테마 토글 버튼 */}
+          <div className='fixed bottom-8 right-8 z-50'>
+            <ThemeToggleButton />
+          </div>
+        </Providers>
+      </body>
     </html>
   );
 }

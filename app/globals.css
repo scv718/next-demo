@@ -1,23 +1,25 @@
-@layer theme, base, mui, components, utilities;
 @import 'tailwindcss';
+@plugin 'flowbite-react/plugin/tailwindcss';
+@source '../.flowbite-react/class-list.json';
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@layer base {
+  /* 기본 (라이트 모드) 변수 */
+  :root {
+    --background: #ffffff;
+    --foreground: #0a0a0a;
+  }
+
+  /* data-theme="dark" 속성이 있을 때 적용될 다크 모드 변수 */
+  [data-theme="dark"] {
+    --background: #111827;
+    --foreground: #ededed;
+  }
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
