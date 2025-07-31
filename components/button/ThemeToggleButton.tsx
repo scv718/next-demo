@@ -1,11 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import * as React from 'react';
 
 import { useTheme } from 'next-themes';
 
-import { Button } from 'flowbite-react';
-import { HiMoon, HiSun } from 'react-icons/hi';
+import { Button } from '@/components/ui/button';
+
+import { Moon, Sun } from 'lucide-react';
 
 export function ThemeToggleButton() {
   const { theme, setTheme, resolvedTheme } = useTheme();
@@ -24,8 +26,13 @@ export function ThemeToggleButton() {
   };
 
   return (
-    <Button onClick={toggleTheme} color='gray' size='sm' className='p-2.5' aria-label='테마 전환'>
-      {resolvedTheme === 'dark' ? <HiSun className='h-5 w-5' /> : <HiMoon className='h-5 w-5' />}
+    <Button variant='outline' size='icon' onClick={toggleTheme}>
+      {resolvedTheme === 'light' ? (
+        <Sun className='h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90' />
+      ) : (
+        <Moon className='absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0' />
+      )}
+      <span className='sr-only'>Toggle theme</span>
     </Button>
   );
 }

@@ -5,11 +5,11 @@ import { useActionState } from 'react';
 import { type ActionState, credentials, kakao } from '@/app/signin/actions';
 import AuthBox from '@/components/boxes/AuthBox';
 import { SocialButton } from '@/components/button/SocialButton';
+import { FormInput } from '@/components/inputs/FormInput';
 import { StyledLink } from '@/components/links/StyledLink';
 import { type LoginSchema, loginSchema } from '@/lib/schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { FloatingLabel, HRText } from 'flowbite-react';
 import { useForm } from 'react-hook-form';
 
 const socialButtons = [
@@ -38,8 +38,8 @@ export function LoginForm() {
   return (
     <AuthBox title={'Log In'}>
       <form action={formAction} className='space-y-4'>
-        <FloatingLabel variant={'outlined'} label={'Email'} type={'email'} required {...register('email')} />
-        <FloatingLabel variant={'outlined'} label={'Password'} type={'password'} required {...register('password')} />
+        <FormInput label='Email' type='email' placeholder='Email' required {...register('email')} />
+        <FormInput label='Password' type='password' placeholder='Password' required {...register('password')} />
         {/* 서버로부터 받은 로그인 실패 에러 메시지 */}
         {state?.error && <p className='error-text'>{state.error}</p>}
         <div className='text-sm'>
@@ -58,10 +58,8 @@ export function LoginForm() {
         </h3>
       </div>
 
-      <HRText text={'OR'} />
-
       {/* Third Party Authentication Options */}
-      <div className='flex items-center justify-center flex-wrap'>
+      <div className='flex items-center justify-center mt-5 flex-wrap'>
         {socialButtons.map((btn) => (
           <SocialButton
             key={btn.alt}
