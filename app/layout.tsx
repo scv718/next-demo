@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import Link from 'next/link';
 
 import { Providers } from '@/app/Providers';
 import { ThemeToggleButton } from '@/components/button/ThemeToggleButton';
+import Navbar from '@/components/navbars/Navbar';
 
 import './globals.css';
 
@@ -40,6 +42,42 @@ export const metadata: Metadata = {
   }
 };
 
+// Navbar에 전달할 메뉴 데이터 예시
+const sampleMenuItems = [
+  { label: 'Home', href: '/' },
+  {
+    label: 'Products',
+    href: '/products',
+    // 서브메뉴 예시
+    subMenu: [
+      { label: 'Laptops', href: '/products/laptops' },
+      { label: 'Monitors', href: '/products/monitors' },
+      { label: 'Keyboards', href: '/products/keyboards' }
+    ]
+  },
+  { label: 'About Us', href: '/about' },
+  { label: 'Contact', href: '/contact' }
+];
+
+// 로고 컴포넌트 예시
+const sampleLogo = (
+  <Link href='/' className='text-xl font-bold'>
+    MyLogo
+  </Link>
+);
+
+// 버튼 컴포넌트 예시
+const sampleButtons = (
+  <div className='flex items-center space-x-2'>
+    <button className='px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200'>
+      Log In
+    </button>
+    <button className='px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700'>
+      Sign Up
+    </button>
+  </div>
+);
+
 export default function RootLayout({
   children
 }: Readonly<{
@@ -49,7 +87,18 @@ export default function RootLayout({
     <html lang='ko' suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>
-          {children}
+          <Navbar
+            logo={sampleLogo}
+            menuItems={sampleMenuItems}
+            buttons={sampleButtons}
+            position={'floating'}
+            rounded='full' // 양쪽이 둥근 모서리
+            subMenuTrigger='click' // 클릭으로 서브메뉴 열기
+            bgColor='bg-white/70 backdrop-blur-sm' // 반투명 배경 + 블러 효과
+            menuAlignment={'center'}
+            mobileMenuStyle={{ rounded: 'sm', shadow: 'lg', menuContentAlignment: 'right' }}
+          />
+          <div className={'mt-30'}>{children}</div>
           {/* 전역 테마 토글 버튼 */}
           <div className='fixed bottom-8 right-8 z-50'>
             <ThemeToggleButton />

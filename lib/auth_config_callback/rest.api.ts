@@ -8,7 +8,7 @@ export default {
       if (account?.provider !== 'credentials') {
         try {
           // 스프링 부트 소셜 로그인 API 호출
-          const res = await fetch(`${process.env.SPRING_API_URL}/api/auth/oauth`, {
+          const res = await fetch(`${process.env.SPRING_API_URL}/auth/oauth`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

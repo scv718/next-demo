@@ -31,7 +31,7 @@ export function RegisterForm() {
         <FormInput label='Username' type='text' placeholder='Username' required {...register('username')} />
         <FormInput label='Password' type='password' placeholder='Password' required {...register('password')} />
         {/* 서버로부터 받은 로그인 실패 에러 메시지 */}
-        {state?.error && <p className='error-text'>{state.error}</p>}
+        {state?.error && <p className='text-red-500 error-text'>{state.error}</p>}
         <button
           className='bg-gradient-to-r dark:text-gray-300 from-blue-500 to-purple-500 shadow-lg mt-6 p-2 text-white rounded-lg w-full hover:scale-105 hover:from-purple-500 hover:to-blue-500 transition duration-300 ease-in-out'
           type='submit'>
