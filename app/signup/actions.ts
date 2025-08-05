@@ -6,6 +6,7 @@ import { registerSchema } from '@/lib/schema';
 
 export interface ActionState {
   error?: string;
+  details?: Record<string, string[]>;
 }
 
 export async function signUp(prevState: ActionState, formData: FormData): Promise<ActionState> {
@@ -14,12 +15,25 @@ export async function signUp(prevState: ActionState, formData: FormData): Promis
   const parsed = registerSchema.safeParse(data);
 
   if (!parsed.success) {
-    return { error: '이메일과 비밀번호를 올바르게 입력해주세요.' };
+    const fieldErrors = parsed.error.issues.reduce(
+      (acc, issue) => {
+        const path = issue.path.join('.'); // 필드 경로 (예: 'user.name')
+        if (!acc[path]) {
+          acc[path] = [];
+        }
+        acc[path].push(issue.message);
+
+        return acc;
+      },
+      {} as Record<string, string[]>
+    );
+
+    return { error: '입력 값을 확인해주세요.', details: fieldErrors };
   }
 
-  const { email, password, username } = parsed.data;
+  const { email, password, username, phoneNumber } = parsed.data;
   // 스프링 부트 회원가입 API 호출
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/signup`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/member/signup`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -27,7 +41,7 @@ export async function signUp(prevState: ActionState, formData: FormData): Promis
       name: username,
       password: password,
       memberType: 'USER',
-      phoneNumber: '010-0000-0000'
+      phoneNumber: phoneNumber
     })
   });
 

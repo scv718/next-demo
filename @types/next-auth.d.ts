@@ -18,6 +18,8 @@ declare module 'next-auth' {
    */
   interface User extends DefaultUser {
     // 스프링 서버에서 발급한 토큰들
+    name: string;
+    email: string;
     accessToken?: string;
     refreshToken?: string;
     // role?: string;
@@ -28,10 +30,9 @@ declare module 'next-auth' {
    * `user` 객체에 우리가 추가한 프로퍼티를 포함하도록 확장합니다.
    */
   interface Session {
-    user: User; // 이제 session.user는 accessToken, refreshToken 등을 포함하는 확장된 User 타입입니다.
+    accessToken?: string;
+    refreshToken?: string;
     error?: string;
-    // 세션 자체에 토큰을 직접 저장하고 싶다면 아래와 같이 추가할 수도 있습니다.
-    // accessToken?: string;
-    // refreshToken?: string;
+    user?: User;
   }
 }

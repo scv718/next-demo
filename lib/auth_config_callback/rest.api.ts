@@ -44,13 +44,11 @@ export default {
         token.refreshToken = user.refreshToken;
       }
 
-      // TODO: Access Token 만료 시 Refresh Token으로 갱신하는 로직 추가
-
       return token;
     },
 
     // 5. session 콜백: 클라이언트에서 세션을 조회할 때마다 실행
-    async session({ session, token }) {
+    async session({ session }) {
       return session;
     }
   }
