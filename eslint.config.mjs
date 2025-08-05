@@ -3,6 +3,7 @@ import nextPlugin from '@next/eslint-plugin-next';
 
 import eslintConfigPrettier from 'eslint-config-prettier';
 import importPlugin from 'eslint-plugin-import';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import pluginPromise from 'eslint-plugin-promise';
 import pluginReact from 'eslint-plugin-react';
 import globals from 'globals';
@@ -32,6 +33,7 @@ export default [
   pluginReact.configs.flat.recommended, // ? https://github.com/jsx-eslint/eslint-plugin-react
   pluginReact.configs.flat['jsx-runtime'], // ? https://github.com/jsx-eslint/eslint-plugin-react
   eslintConfigPrettier, // ? https://github.com/prettier/eslint-config-prettier
+  eslintPluginPrettierRecommended,
   {
     rules: {
       'no-unused-vars': 'off',
