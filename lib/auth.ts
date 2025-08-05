@@ -22,7 +22,7 @@ export const {
       async authorize(credentials) {
         try {
           // 스프링 부트 로그인 API 호출
-          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/member/login`, {
+          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
