@@ -58,7 +58,7 @@ const sampleMenuItems = [
     ]
   },
   { label: 'About Us', href: '/about' },
-  { label: 'Contact', href: '/contact' }
+  { label: '문의 게시판', href: '/posts' }
 ];
 
 // 로고 컴포넌트 예시
