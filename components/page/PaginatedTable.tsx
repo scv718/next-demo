@@ -12,7 +12,7 @@ interface Post {
   isSecret: boolean;
   viewCount: number;
   createdAt: string;
-  authorName: string;
+  authorEmail: string;
 }
 
 interface Props {
@@ -105,7 +105,7 @@ export default function PaginatedTable({ apiUrl }: Props) {
                 onClick={() => router.push(`/posts/${post.id}`)}>
                 {post.title}
               </td>
-              <td className='border p-2 text-center'>{post.authorName}</td>
+              <td className='border p-2 text-center'>{post.authorEmail}</td>
               <td className='border p-2 text-center'>{post.postType}</td>
               <td className='border p-2 text-center'>{post.isSecret ? '🔒' : ''}</td>
               <td className='border p-2 text-center'>{post.viewCount}</td>

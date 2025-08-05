@@ -27,7 +27,7 @@ export default function WritePostPage() {
     const payload = {
       title,
       content,
-      authorId: session.user.id, // ✅ 로그인 사용자 ID
+      authorEmail: "난 라곰이다옹",
       postType,
       isSecret
     };
@@ -42,6 +42,7 @@ export default function WritePostPage() {
       alert('게시글이 등록되었습니다.');
       router.push('/posts');
     } else {
+      alert(JSON.stringify(session, null, 2));
       alert('등록에 실패했습니다.');
     }
   };
