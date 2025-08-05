@@ -1,2 +1,7 @@
 README.MD
 CHANGELOG.md
+.idea
+.next
+.node_modules
+components/ui
+lib/utils.ts

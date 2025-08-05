@@ -11,6 +11,16 @@ import tseslint from 'typescript-eslint';
 
 export default [
   {
+    ignores: [
+      'node_modules/', // node_modules 폴더 전체
+      '.next/', // Next.js 빌드 결과물
+      'dist/', // 일반적인 빌드 결과물 폴더
+      'build/', // 빌드 결과물 폴더
+      'components/ui/*', // src/legacy 폴더 아래의 모든 파일
+      'lib/utils.ts'
+    ]
+  },
+  {
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}']
   },
   {
