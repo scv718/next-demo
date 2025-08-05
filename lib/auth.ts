@@ -1,4 +1,5 @@
 import NextAuth from 'next-auth';
+import type { User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import KakaoProvider from 'next-auth/providers/kakao';
 
@@ -18,9 +19,14 @@ export const {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' }
       },
-      async authorize(credentials, req) {
+      async authorize(credentials): Promise<
+        | (User & {
+            accessToken: string;
+            refreshToken: string;
+          })
+        | null
+      > {
         try {
-          // 스프링 부트 로그인 API 호출
           const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -30,18 +36,49 @@ export const {
             })
           });
 
-          const user = await res.json();
+          const result = await res.json();
 
-          // API 응답이 성공적이면 user 객체를 반환
-          if (res.ok && user) {
-            return user;
+          if (res.ok && result?.data?.accessToken) {
+            return {
+              id: credentials!.email as string, // string 명시
+              email: credentials!.email as string,
+              accessToken: result.data.accessToken,
+              refreshToken: result.data.refreshToken
+            };
           }
-        } catch (error) {
-          console.error('Authorize Error:', error);
+
+          return null;
+        } catch (err) {
+          console.error('authorize error', err);
 
           return null;
         }
       }
     })
-  ]
+  ],
+  session: {
+    strategy: 'jwt'
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+        token.accessToken = user.accessToken;
+        token.refreshToken = user.refreshToken;
+      }
+
+      return token;
+    },
+    async session({ session, token }) {
+      session.user = {
+        id: token.id,
+        email: token.email,
+        accessToken: token.accessToken,
+        refreshToken: token.refreshToken
+      };
+
+      return session;
+    }
+  }
 });

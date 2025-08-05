@@ -2,10 +2,14 @@
 
 import { ThemeProvider } from 'next-themes';
 
+import { SessionProvider } from 'next-auth/react';
+
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <ThemeProvider attribute='data-theme' defaultTheme='light'>
-      {children}
-    </ThemeProvider>
+    <SessionProvider>
+      <ThemeProvider attribute='data-theme' defaultTheme='light'>
+        {children}
+      </ThemeProvider>
+    </SessionProvider>
   );
 }

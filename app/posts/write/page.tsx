@@ -4,27 +4,33 @@ import { useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 
+import { useSession } from 'next-auth/react';
+
 export default function WritePostPage() {
   const router = useRouter();
+  const { data: session } = useSession(); // ✅ 세션에서 로그인 정보
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [authorId, setAuthorId] = useState(1); // 실제 로그인된 사용자 ID로 교체 필요
   const [postType, setPostType] = useState('GENERAL');
   const [isSecret, setIsSecret] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!session?.user?.id) {
+      alert('로그인이 필요합니다.');
+
+      return;
+    }
+
     const payload = {
       title,
       content,
-      authorId,
+      authorId: session.user.id, // ✅ 로그인 사용자 ID
       postType,
       isSecret
     };
-
-    console.log(`${process.env.NEXT_PUBLIC_API_URL}/posts`);
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts`, {
       method: 'POST',
@@ -34,7 +40,7 @@ export default function WritePostPage() {
 
     if (res.ok) {
       alert('게시글이 등록되었습니다.');
-      router.push('/posts'); // 목록으로 이동
+      router.push('/posts');
     } else {
       alert('등록에 실패했습니다.');
     }
