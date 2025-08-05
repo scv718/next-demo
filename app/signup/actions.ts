@@ -19,7 +19,7 @@ export async function signUp(prevState: ActionState, formData: FormData): Promis
 
   const { email, password, username } = parsed.data;
   // 스프링 부트 회원가입 API 호출
-  const res = await fetch(`${process.env.SPRING_API_URL}/api/v1/member`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/signup`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
