@@ -51,10 +51,6 @@ export default {
 
     // 5. session 콜백: 클라이언트에서 세션을 조회할 때마다 실행
     async session({ session, token }) {
-      // jwt 콜백에서 넘겨준 정보를 세션에 담아 클라이언트로 전달
-      session.accessToken = token.accessToken;
-      session.refreshToken = token.refreshToken;
-
       return session;
     }
   }
