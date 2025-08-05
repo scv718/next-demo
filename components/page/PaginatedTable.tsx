@@ -1,6 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import {
+  Table,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+} from "@/components/ui/table";
+
+import { Button } from "@/components/ui/button";
 
 interface Post {
   id: number;
@@ -30,37 +40,35 @@ export default function PaginatedTable({ apiUrl }: Props) {
   }, [page]);
 
   return (
-    <div className="p-4">
-      <table className="w-full border">
-        <thead className="bg-gray-100">
-          <tr>
-            <th className="border p-2">ID</th>
-            <th className="border p-2">제목</th>
-            <th className="border p-2">작성일</th>
-          </tr>
-        </thead>
-        <tbody>
-          {posts.map(post => (
-            <tr key={post.id}>
-              <td className="border p-2">{post.id}</td>
-              <td className="border p-2">{post.title}</td>
-              <td className="border p-2">{post.createdAt}</td>
-            </tr>
+    <div className="p-6 max-w-4xl mx-auto">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>ID</TableHead>
+            <TableHead>제목</TableHead>
+            <TableHead>작성일</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {posts.map((post) => (
+            <TableRow key={post.id}>
+              <TableCell>{post.id}</TableCell>
+              <TableCell>{post.title}</TableCell>
+              <TableCell>{post.createdAt}</TableCell>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
 
-      <div className="flex justify-center mt-4 space-x-2">
+      <div className="flex justify-center gap-2 mt-6">
         {[...Array(totalPages)].map((_, i) => (
-          <button
+          <Button
             key={i}
-            className={`px-3 py-1 border rounded ${
-              page === i + 1 ? "bg-blue-500 text-white" : "bg-white"
-            }`}
+            variant={page === i + 1 ? "default" : "outline"}
             onClick={() => setPage(i + 1)}
           >
             {i + 1}
-          </button>
+          </Button>
         ))}
       </div>
     </div>
