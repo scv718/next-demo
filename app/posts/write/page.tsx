@@ -27,7 +27,7 @@ export default function WritePostPage() {
     const payload = {
       title,
       content,
-      authorEmail: "난 라곰이다옹",
+      authorEmail: '난 라곰이다옹',
       postType,
       isSecret
     };
