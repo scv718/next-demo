@@ -1,3 +1,5 @@
+import React from 'react';
+
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import Link from 'next/link';
@@ -6,6 +8,7 @@ import { Providers } from '@/app/Providers';
 import AuthButton from '@/components/button/AuthButton';
 import { ThemeToggleButton } from '@/components/button/ThemeToggleButton';
 import Navbar from '@/components/navbars/Navbar';
+import { auth } from '@/lib/auth';
 
 import './globals.css';
 import { SessionProvider } from 'next-auth/react';
@@ -68,11 +71,13 @@ const sampleLogo = (
   </Link>
 );
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
+
   return (
     <html lang='ko' suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
@@ -81,7 +86,7 @@ export default function RootLayout({
             <Navbar
               logo={sampleLogo}
               menuItems={sampleMenuItems}
-              buttons={<AuthButton />}
+              buttons={<AuthButton session={session} />}
               position={'floating'}
               rounded='full' // 양쪽이 둥근 모서리
               subMenuTrigger='click' // 클릭으로 서브메뉴 열기

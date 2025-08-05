@@ -1,8 +1,6 @@
 'use client';
 
-import { useActionState, useEffect } from 'react';
-
-import { useRouter } from 'next/navigation';
+import { useActionState } from 'react';
 
 import { type ActionState, credentials, kakao } from '@/app/signin/actions';
 import AuthBox from '@/components/boxes/AuthBox';
@@ -25,13 +23,7 @@ const socialButtons = [
 ];
 
 export function LoginForm() {
-  const router = useRouter();
   const [state, formAction, isPending] = useActionState<ActionState, FormData>(credentials, { error: '' });
-  useEffect(() => {
-    if (state.success) {
-      router.push('/');
-    }
-  }, [state, router]);
   const { register } = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
     defaultValues: { email: '', password: '' }

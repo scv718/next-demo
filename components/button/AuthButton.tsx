@@ -6,10 +6,14 @@ import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 
-import { signOut, useSession } from 'next-auth/react';
+import { type Session } from 'next-auth';
+import { signOut } from 'next-auth/react';
 
-export default function AuthButton(): React.ReactNode {
-  const { data: session } = useSession();
+type AuthButtonProps = {
+  session: Session | null;
+};
+
+export default function AuthButton({ session }: AuthButtonProps): React.ReactNode {
   const anonymous = (
     <div className='flex items-center space-x-2'>
       <Link
