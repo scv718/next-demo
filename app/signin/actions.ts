@@ -41,3 +41,11 @@ export async function credentials(prevState: ActionState, formData: FormData): P
 export async function kakao() {
   await signIn('kakao', { redirectTo: '/' });
 }
+
+export async function naver() {
+  await signIn('naver', { redirectTo: '/' });
+}
+
+export async function google() {
+  await signIn('google', { redirectTo: '/' });
+}

@@ -2,7 +2,7 @@
 
 import { useActionState } from 'react';
 
-import { type ActionState, credentials, kakao } from '@/app/signin/actions';
+import { type ActionState, credentials, google, kakao, naver } from '@/app/signin/actions';
 import AuthBox from '@/components/boxes/AuthBox';
 import { SocialButton } from '@/components/button/SocialButton';
 import { FormInput } from '@/components/inputs/FormInput';
@@ -13,8 +13,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
 const socialButtons = [
-  { src: '/assets/images/login/google.svg', onClick: kakao, alt: 'Google' },
-  { src: '/assets/images/login/linkedin.svg', onClick: kakao, alt: 'Linkedin' },
+  { src: '/assets/images/login/google.svg', onClick: google, alt: 'Google' },
+  { src: '/assets/images/login/linkedin.svg', onClick: naver, alt: 'Linkedin' },
   { src: '/assets/images/login/github.svg', onClick: kakao, alt: 'Github', isDarkModeInvert: true },
   { src: '/assets/images/login/facebook.svg', onClick: kakao, alt: 'Facebook' },
   { src: '/assets/images/login/twitter.svg', onClick: kakao, alt: 'Twitter' },

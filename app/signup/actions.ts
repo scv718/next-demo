@@ -33,7 +33,7 @@ export async function signUp(prevState: ActionState, formData: FormData): Promis
 
   const { email, password, username, phoneNumber } = parsed.data;
   // 스프링 부트 회원가입 API 호출
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/signup`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${process.env.MEMBER_SIGNUP}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({

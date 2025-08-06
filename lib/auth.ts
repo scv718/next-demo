@@ -1,7 +1,9 @@
 import NextAuth from 'next-auth';
 import type { User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import GoogleProvider from 'next-auth/providers/google';
 import KakaoProvider from 'next-auth/providers/kakao';
+import NaverProvider from 'next-auth/providers/naver';
 
 export const {
   handlers: { GET, POST },
@@ -14,6 +16,14 @@ export const {
       clientId: process.env.KAKAO_CLIENT_ID!,
       clientSecret: process.env.KAKAO_CLIENT_SECRET!
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET
+    }),
+    NaverProvider({
+      clientId: process.env.NAVER_CLIENT_ID,
+      clientSecret: process.env.NAVER_CLIENT_SECRET
+    }),
     CredentialsProvider({
       credentials: {
         email: { label: 'Email', type: 'email' },
@@ -22,7 +32,7 @@ export const {
       async authorize(credentials) {
         try {
           // 스프링 부트 로그인 API 호출
-          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
+          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${process.env.MEMBER_LOGIN}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
