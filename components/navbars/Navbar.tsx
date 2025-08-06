@@ -76,7 +76,16 @@ const Navbar: React.FC<NavbarProps> = ({
 
   switch (position) {
     case 'floating':
-      navClasses.push('fixed', 'z-50', 'top-4', 'left-1/2', '-translate-x-1/2', 'w-[90%]', 'max-w-6xl', 'shadow-lg');
+      navClasses.push(
+        'fixed',
+        'z-50',
+        'top-4',
+        'left-1/2',
+        '-translate-x-1/2',
+        'w-[90%]',
+        'max-w-[1280px]',
+        'shadow-lg'
+      );
       break;
 
     case 'fixed':
@@ -96,7 +105,7 @@ const Navbar: React.FC<NavbarProps> = ({
     <Fragment>
       {/* 1. 네비게이션 바 */}
       <nav className={navContainerClasses}>
-        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+        <div className='max-w-8xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='flex items-center justify-between h-16'>
             {/* 로고, 메뉴, 버튼 등 내부 로직은 이전과 동일 */}
             <div className='flex-shrink-0'>{logo}</div>

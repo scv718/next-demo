@@ -44,25 +44,6 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.13 0.028 261.692);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.13 0.028 261.692);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.13 0.028 261.692);
-  --primary: oklch(0.21 0.034 264.665);
-  --primary-foreground: oklch(0.985 0.002 247.839);
-  --secondary: oklch(0.967 0.003 264.542);
-  --secondary-foreground: oklch(0.21 0.034 264.665);
-  --muted: oklch(0.967 0.003 264.542);
-  --muted-foreground: oklch(0.551 0.027 264.364);
-  --accent: oklch(0.967 0.003 264.542);
-  --accent-foreground: oklch(0.21 0.034 264.665);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.928 0.006 264.531);
-  --input: oklch(0.928 0.006 264.531);
-  --ring: oklch(0.707 0.022 261.325);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -76,27 +57,29 @@
   --sidebar-accent-foreground: oklch(0.21 0.034 264.665);
   --sidebar-border: oklch(0.928 0.006 264.531);
   --sidebar-ring: oklch(0.707 0.022 261.325);
+  --background: oklch(100% 0 0); /* 완전한 흰색 */
+  --foreground: oklch(29.23% 0.027 257.34); /* 진한 회색 텍스트 */
+  --card: oklch(100% 0 0);
+  --card-foreground: oklch(29.23% 0.027 257.34);
+  --popover: oklch(100% 0 0);
+  --popover-foreground: oklch(29.23% 0.027 257.34);
+  --primary: oklch(31.81% 0.071 258.93); /* 기본 액션 색상 (진한 남색) */
+  --primary-foreground: oklch(98.71% 0.011 252.12); /* 기본 액션 텍스트 색상 */
+  --secondary: oklch(96.33% 0.011 252.12);
+  --secondary-foreground: oklch(31.81% 0.071 258.93);
+  --muted: oklch(96.33% 0.011 252.12); /* 은은한 배경색 */
+  --muted-foreground: oklch(62.37% 0.022 255.43); /* 은은한 텍스트색 */
+  --accent: oklch(96.33% 0.011 252.12);
+  --accent-foreground: oklch(31.81% 0.071 258.93);
+  --destructive: oklch(66.98% 0.222 25.1);
+  --destructive-foreground: oklch(98.71% 0.011 252.12);
+  --border: oklch(92.1% 0.017 254.18); /* 경계선 색상 */
+  --input: oklch(92.1% 0.017 254.18); /* 입력 필드 배경 */
+  --ring: oklch(29.23% 0.027 257.34); /* 포커스 링 */
+  --radius: 0.5rem;
 }
 
 .dark {
-  --background: oklch(0.13 0.028 261.692);
-  --foreground: oklch(0.985 0.002 247.839);
-  --card: oklch(0.21 0.034 264.665);
-  --card-foreground: oklch(0.985 0.002 247.839);
-  --popover: oklch(0.21 0.034 264.665);
-  --popover-foreground: oklch(0.985 0.002 247.839);
-  --primary: oklch(0.928 0.006 264.531);
-  --primary-foreground: oklch(0.21 0.034 264.665);
-  --secondary: oklch(0.278 0.033 256.848);
-  --secondary-foreground: oklch(0.985 0.002 247.839);
-  --muted: oklch(0.278 0.033 256.848);
-  --muted-foreground: oklch(0.707 0.022 261.325);
-  --accent: oklch(0.278 0.033 256.848);
-  --accent-foreground: oklch(0.985 0.002 247.839);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
@@ -110,6 +93,26 @@
   --sidebar-accent-foreground: oklch(0.985 0.002 247.839);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
+  --background: oklch(22.2% 0.022 259.41);     /* 기존 bg-gray-900에 해당 */
+  --foreground: oklch(98.71% 0.005 257.34);    /* 기존 text-white 계열 */
+  --card: oklch(27.56% 0.023 258.12);         /* 기존 bg-gray-800에 해당 */
+  --card-foreground: oklch(98.71% 0.005 257.34);
+  --popover: oklch(22.2% 0.022 259.41);
+  --popover-foreground: oklch(98.71% 0.005 257.34);
+  /* Primary 색상은 기존의 파란색 계열을 유지합니다. */
+  --primary: oklch(63.92% 0.163 258.12);      /* 기존 bg-blue-600에 해당 */
+  --primary-foreground: oklch(98.71% 0.011 252.12); /* 버튼 위 텍스트 */
+  --secondary: oklch(35.91% 0.022 255.43);
+  --secondary-foreground: oklch(98.71% 0.005 257.34);
+  --muted: oklch(27.56% 0.023 258.12);        /* 기존 bg-gray-800에 해당 */
+  --muted-foreground: oklch(71.42% 0.013 252.12);   /* 기존 text-gray-400에 해당 */
+  --accent: oklch(35.91% 0.022 255.43);
+  --accent-foreground: oklch(98.71% 0.005 257.34);
+  --destructive: oklch(57.24% 0.224 28.56);
+  --destructive-foreground: oklch(98.71% 0.005 257.34);
+  --border: oklch(35.91% 0.022 255.43);         /* 기존 border-gray-700에 해당 */
+  --input: oklch(35.91% 0.022 255.43);          /* 기존 input의 bg-gray-700에 해당 */
+  --ring: oklch(63.92% 0.163 258.12);           /* 포커스 링 (Primary 색상과 통일) */
 }
 
 @layer base {

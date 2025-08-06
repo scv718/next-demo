@@ -67,7 +67,7 @@ const sampleMenuItems = [
 // 로고 컴포넌트 예시
 const sampleLogo = (
   <Link href='/' className='text-xl font-bold'>
-    MyLogo
+    코드용병단
   </Link>
 );
 
@@ -90,7 +90,8 @@ export default async function RootLayout({
               position={'floating'}
               rounded='full' // 양쪽이 둥근 모서리
               subMenuTrigger='click' // 클릭으로 서브메뉴 열기
-              bgColor='bg-white/70 backdrop-blur-sm' // 반투명 배경 + 블러 효과
+              bgColor='bg-sidebar backdrop-blur-sm' // 반투명 배경 + 블러 효과
+              textColor={'text-sidebar-foreground'}
               menuAlignment={'center'}
               mobileMenuStyle={{ rounded: 'sm', shadow: 'lg', menuContentAlignment: 'right' }}
             />
