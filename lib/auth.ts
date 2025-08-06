@@ -1,3 +1,5 @@
+import { signInWithCredentials, signInWithSocial } from '@/lib/services/authService';
+
 import NextAuth from 'next-auth';
 import type { User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -31,25 +33,8 @@ export const {
       },
       async authorize(credentials) {
         try {
-          // 스프링 부트 로그인 API 호출
-          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${process.env.MEMBER_LOGIN}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              email: credentials?.email,
-              password: credentials?.password
-            })
-          });
-          if (res.ok) {
-            const json = await res.json();
-            const user: User = {
-              name: json.data.member?.name,
-              email: json.data.member?.email,
-              accessToken: json.data.accessToken,
-              refreshToken: json.data.refreshToken
-            };
-
-            return user;
+          if (credentials.email && credentials.password) {
+            return await signInWithCredentials(credentials.email, credentials.password);
           }
 
           return null;
@@ -65,13 +50,26 @@ export const {
     strategy: 'jwt'
   },
   callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.email = user.email;
-        token.name = user.name;
-        token.accessToken = user.accessToken;
-        token.refreshToken = user.refreshToken;
-        token.user = user;
+    async jwt({ token, user, account }) {
+      if (account && user) {
+        if (account.provider === 'credentials') {
+          token.accessToken = user.accessToken;
+          token.refreshToken = user.refreshToken;
+          token.user = user;
+        } else if (['kakao', 'google', 'naver'].includes(account.provider)) {
+          try {
+            const user = await signInWithSocial(account.provider, account.access_token);
+
+            token.accessToken = user.accessToken;
+            token.refreshToken = user.refreshToken;
+            token.user = user;
+          } catch (error) {
+            console.error('Error during social sign in JWT callback:', error);
+            token.accessToken = undefined;
+
+            return null;
+          }
+        }
       }
 
       return token;
