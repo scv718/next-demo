@@ -1,42 +1,45 @@
-# 1. 빌드 단계 (Builder Stage)
+# 1. 빌드 단계
 FROM node:22-bookworm-slim AS builder
 
 WORKDIR /usr/src/app
 
-# 패키지 복사 및 설치
-COPY package*.json ./
+# ✅ 의존성 캐시를 위해 package.json과 lock 파일만 먼저 복사
+COPY package.json package-lock.json ./
+
+# ✅ 전체 의존성 설치 (개발용 포함)
 RUN npm install
 
-# 앱 복사 및 빌드
+# ✅ 이후에 소스 코드 복사 → 이 부분에서만 캐시 깨지게 함
 COPY . .
+
+# ✅ 빌드 수행
 RUN npm run build
 
 
-# 2. 실행 단계 (Runner Stage)
+# 2. 실행 단계
 FROM node:22-bookworm-slim AS runner
 
 WORKDIR /usr/src/app
 
-# 보안을 위해 non-root 사용자 생성
+# 보안 사용자 생성
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
 
-# 소스 및 빌드 파일 복사
-COPY package*.json ./
+# ✅ 의존성 설치용 파일만 복사 (이 순서도 중요!)
+COPY package.json package-lock.json ./
+
+# ✅ production 모드로 의존성 설치 (캐시 잘 작동함)
+RUN npm install --omit=dev --ignore-scripts --no-audit
+
+# ✅ 빌드된 파일들만 복사
 COPY --from=builder /usr/src/app/.next/standalone ./
 COPY --from=builder /usr/src/app/public ./public
 COPY --from=builder /usr/src/app/.next/static ./.next/static
 
-# production 의존성만 설치
-RUN npm install --omit=dev --ignore-scripts --no-audit
-
-# 사용자 권한 전환
 USER nextjs
 
-# 포트 및 환경 변수
 EXPOSE 4030
 ENV NODE_ENV=production
 ENV HOSTNAME=0.0.0.0
 
-# 앱 실행
 CMD ["node", "server.js"]
