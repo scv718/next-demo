@@ -1,10 +1,8 @@
 import Image from 'next/image';
 
+import ContactForm from '@/components/form/ContactForm';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 
 import { ArrowRight, Cloud, Code, Palette } from 'lucide-react';
 
@@ -125,33 +123,7 @@ export default function HomePage() {
               다음 프로젝트를 시작할 준비가 되셨나요? 메시지를 보내주시면 24시간 이내에 답변드리겠습니다.
             </p>
           </div>
-          <Card className='bg-card border-border'>
-            <CardContent className='p-8'>
-              <form className='space-y-6'>
-                <div className='grid md:grid-cols-2 gap-6'>
-                  <div className='space-y-2'>
-                    <Label htmlFor='fullName'>Full Name</Label>
-                    <Input id='fullName' placeholder='Enter your full name' />
-                  </div>
-                  <div className='space-y-2'>
-                    <Label htmlFor='email'>Email Address</Label>
-                    <Input id='email' type='email' placeholder='Enter your email' />
-                  </div>
-                </div>
-                <div className='space-y-2'>
-                  <Label htmlFor='subject'>Subject</Label>
-                  <Input id='subject' placeholder='Enter the subject' />
-                </div>
-                <div className='space-y-2'>
-                  <Label htmlFor='message'>Your Message</Label>
-                  <Textarea id='message' placeholder='Tell us about your project...' rows={6} />
-                </div>
-                <Button className='w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3'>
-                  Send Message
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
+          <ContactForm />
         </div>
       </section>
     </div>

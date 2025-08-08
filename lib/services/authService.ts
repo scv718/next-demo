@@ -1,17 +1,5 @@
 import type { User } from 'next-auth';
 
-interface BackendAuthResponse {
-  data: {
-    member: {
-      id: string;
-      name: string;
-      email: string;
-    };
-    accessToken: string;
-    refreshToken: string;
-  };
-}
-
 /**
  * 아이디/비밀번호 기반으로 백엔드에 로그인을 요청하는 함수
  */
